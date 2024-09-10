@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import {tc} from '../Utils.js'
+import { tc } from '../Utils.js'
 
 function NewCountry(props) {
   const [open, setOpen] = useState(false);
@@ -46,7 +46,7 @@ function NewCountry(props) {
             <button onClick={closeDialog}>
               Cancel
             </button>
-            <button onClick={handleSave}>
+            <button disabled={newCountryName.length === 0} onClick={handleSave}>
               Save
             </button>
           </div>
