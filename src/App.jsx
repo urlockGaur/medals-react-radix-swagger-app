@@ -18,6 +18,11 @@ function App() {
   function handleDelete(countryId) {
     setCountries([...countries].filter(c => c.id !== countryId));
   }
+  function getAllMedalsTotal() {
+    let sum = 0;
+    medals.current.forEach(medal => { sum += countries.reduce((a, b) => a + b[medal.name], 0); });
+    return sum;
+  }
 
   // this is the functional equivalent to componentDidMount
   useEffect(() => {
@@ -42,7 +47,7 @@ function App() {
 
   return (
     <>
-      <h1>Olympic Medals <NewCountry onAdd={handleAdd} /></h1>
+      <h1>Olympic Medals ({getAllMedalsTotal()}) <NewCountry onAdd={handleAdd} /></h1>
       <div style={{ width: "100%", display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
         {
           countries.sort((a, b) => a.name.localeCompare(b.name)).map(country =>
