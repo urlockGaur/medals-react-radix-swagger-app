@@ -5,6 +5,9 @@ function NewCountry(props) {
   const [open, setOpen] = useState(false);
   const [newCountryName, setNewCountryName] = useState("");
 
+  function handleModalKeyPress(e) {
+    (e.keyCode ? e.keyCode : e.which) === 13 && handleSave();
+  }
   function handleSave() {
     if (newCountryName.length > 0) {
       props.onAdd(newCountryName);
@@ -42,6 +45,7 @@ function NewCountry(props) {
               autoFocus
               value={newCountryName}
               onChange={handleChange}
+              onKeyUp={handleModalKeyPress}
             /><br />
             <button onClick={closeDialog}>
               Cancel
