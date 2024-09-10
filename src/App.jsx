@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import NewCountry from './components/NewCountry';
+import Country from './components/Country';
 import './App.css'
 
 function App() {
@@ -36,7 +37,12 @@ function App() {
       <h1>Olympic Medals <NewCountry onAdd={handleAdd} /></h1>
       <ul>
         {
-          countries.sort((a, b) => a.name.localeCompare(b.name)).map(country => <li key={country.id}>{country.name}</li>)
+          countries.sort((a, b) => a.name.localeCompare(b.name)).map(country =>
+            <Country
+              key={country.id}
+              country={country}
+            />
+          )
         }
       </ul>
     </>
