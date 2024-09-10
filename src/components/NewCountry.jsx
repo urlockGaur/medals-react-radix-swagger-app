@@ -2,6 +2,7 @@ import React, { useState } from "react"
 
 function NewCountry(props) {
   const [open, setOpen] = useState(false);
+  const [newCountryName, setNewCountryName] = useState("");
 
   return (
     <>
@@ -24,6 +25,8 @@ function NewCountry(props) {
               placeholder="Enter the country name"
               autoComplete="off"
               autoFocus
+              value={newCountryName}
+              onChange={(e) => setNewCountryName(e.target.value)}
             /><br />
             <button>
               Cancel
