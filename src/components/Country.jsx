@@ -14,6 +14,7 @@ function Country(props) {
         <Medal
           key={medal.id}
           medal={medal}
+          country={props.country}
         />
       )}
     </div>
