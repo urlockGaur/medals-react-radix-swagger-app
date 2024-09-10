@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import {tc} from '../Utils.js'
 
 function NewCountry(props) {
   const [open, setOpen] = useState(false);
@@ -13,6 +14,9 @@ function NewCountry(props) {
   function closeDialog() {
     setNewCountryName("");
     setOpen(false);
+  }
+  const handleChange = (e) => {
+    setNewCountryName(tc(e.target.value));
   }
 
   return (
@@ -37,7 +41,7 @@ function NewCountry(props) {
               autoComplete="off"
               autoFocus
               value={newCountryName}
-              onChange={(e) => setNewCountryName(e.target.value)}
+              onChange={handleChange}
             /><br />
             <button onClick={closeDialog}>
               Cancel
