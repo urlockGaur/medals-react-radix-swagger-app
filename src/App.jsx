@@ -10,6 +10,9 @@ function App() {
     const id = countries.length === 0 ? 1 : Math.max(...countries.map(country => country.id)) + 1;
     setCountries([...countries].concat({ id: id, name: name, gold: 0, silver: 0, bronze: 0 }));
   }
+  function handleDelete(countryId) {
+    setCountries([...countries].filter(c => c.id !== countryId));
+  }
 
   // this is the functional equivalent to componentDidMount
   useEffect(() => {
@@ -41,6 +44,7 @@ function App() {
             <Country
               key={country.id}
               country={country}
+              onDelete={handleDelete}
             />
           )
         }
