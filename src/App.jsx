@@ -30,7 +30,7 @@ function App() {
       <h1>Olympic Medals</h1>
       <ul>
         {
-          countries.map(country => <li key={country.id}>{country.name}</li>)
+          countries.sort((a, b) => a.name.localeCompare(b.name)).map(country => <li key={country.id}>{country.name}</li>)
         }
       </ul>
     </>
