@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import NewCountry from './components/NewCountry';
 import './App.css'
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
 
   return (
     <>
-      <h1>Olympic Medals</h1>
+      <h1>Olympic Medals <NewCountry /></h1>
       <ul>
         {
           countries.sort((a, b) => a.name.localeCompare(b.name)).map(country => <li key={country.id}>{country.name}</li>)
