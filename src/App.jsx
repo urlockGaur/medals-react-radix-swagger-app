@@ -1,10 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import NewCountry from './components/NewCountry';
 import Country from './components/Country';
 import './App.css'
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const medals = useRef([
+    { id: 1, name: 'gold', color: '#FFD700', rank: 1 },
+    { id: 2, name: 'silver', color: '#C0C0C0', rank: 2 },
+    { id: 3, name: 'bronze', color: '#CD7F32', rank: 3 },
+  ]);
 
   function handleAdd(name) {
     const id = countries.length === 0 ? 1 : Math.max(...countries.map(country => country.id)) + 1;
@@ -38,17 +43,18 @@ function App() {
   return (
     <>
       <h1>Olympic Medals <NewCountry onAdd={handleAdd} /></h1>
-      <ul>
+      <div style={{ width: "100%", display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
         {
           countries.sort((a, b) => a.name.localeCompare(b.name)).map(country =>
             <Country
               key={country.id}
               country={country}
+              medals={medals.current}
               onDelete={handleDelete}
             />
           )
         }
-      </ul>
+      </div>
     </>
   )
 }
