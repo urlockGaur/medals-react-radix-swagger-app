@@ -5,6 +5,11 @@ import './App.css'
 function App() {
   const [countries, setCountries] = useState([]);
 
+  function handleAdd(name) {
+    const id = countries.length === 0 ? 1 : Math.max(...countries.map(country => country.id)) + 1;
+    setCountries([...countries].concat({ id: id, name: name, gold: 0, silver: 0, bronze: 0 }));
+  }
+
   // this is the functional equivalent to componentDidMount
   useEffect(() => {
     // initial data loaded here
@@ -28,7 +33,7 @@ function App() {
 
   return (
     <>
-      <h1>Olympic Medals <NewCountry /></h1>
+      <h1>Olympic Medals <NewCountry onAdd={handleAdd} /></h1>
       <ul>
         {
           countries.sort((a, b) => a.name.localeCompare(b.name)).map(country => <li key={country.id}>{country.name}</li>)

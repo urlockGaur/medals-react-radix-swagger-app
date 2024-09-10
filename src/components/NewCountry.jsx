@@ -4,6 +4,12 @@ function NewCountry(props) {
   const [open, setOpen] = useState(false);
   const [newCountryName, setNewCountryName] = useState("");
 
+  function handleSave() {
+    if (newCountryName.length > 0) {
+      props.onAdd(newCountryName);
+      closeDialog();
+    }
+  }
   function closeDialog() {
     setNewCountryName("");
     setOpen(false);
@@ -36,7 +42,7 @@ function NewCountry(props) {
             <button onClick={closeDialog}>
               Cancel
             </button>
-            <button>
+            <button onClick={handleSave}>
               Save
             </button>
           </div>
