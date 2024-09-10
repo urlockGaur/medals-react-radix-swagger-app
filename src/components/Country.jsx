@@ -21,6 +21,8 @@ function Country(props) {
           key={medal.id}
           medal={medal}
           country={props.country}
+          onIncrement={props.onIncrement}
+          onDecrement={props.onDecrement}
         />
       )}
     </div>

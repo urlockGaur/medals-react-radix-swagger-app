@@ -18,6 +18,18 @@ function App() {
   function handleDelete(countryId) {
     setCountries([...countries].filter(c => c.id !== countryId));
   }
+  function handleIncrement(countryId, medalName) {
+    const idx = countries.findIndex(c => c.id === countryId);
+    const mutableCountries = [...countries];
+    mutableCountries[idx][medalName] += 1;
+    setCountries(mutableCountries);
+  }
+  function handleDecrement(countryId, medalName) {
+    const idx = countries.findIndex(c => c.id === countryId);
+    const mutableCountries = [...countries];
+    mutableCountries[idx][medalName] -= 1;
+    setCountries(mutableCountries);
+  }
   function getAllMedalsTotal() {
     let sum = 0;
     medals.current.forEach(medal => { sum += countries.reduce((a, b) => a + b[medal.name], 0); });
@@ -56,6 +68,8 @@ function App() {
               country={country}
               medals={medals.current}
               onDelete={handleDelete}
+              onIncrement={handleIncrement}
+              onDecrement={handleDecrement}
             />
           )
         }
