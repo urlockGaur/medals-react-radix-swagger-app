@@ -7,6 +7,7 @@ function NewCountry(props) {
 
   function handleModalKeyPress(e) {
     (e.keyCode ? e.keyCode : e.which) === 13 && handleSave();
+    (e.keyCode ? e.keyCode : e.which) === 27 && closeDialog();
   }
   function handleSave() {
     if (newCountryName.length > 0) {
