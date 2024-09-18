@@ -1,15 +1,23 @@
 import { useState, useEffect, useRef } from 'react'
 import NewCountry from './components/NewCountry';
 import Country from './components/Country';
+import { Theme, Button, Flex, Heading, Badge, Container } from '@radix-ui/themes';
+import { SunIcon, MoonIcon } from '@radix-ui/react-icons';
+import '@radix-ui/themes/styles.css';
 import './App.css'
 
 function App() {
+  const [appearance, setAppearance] = useState("dark");
   const [countries, setCountries] = useState([]);
   const medals = useRef([
     { id: 1, name: 'gold', color: '#FFD700', rank: 1 },
     { id: 2, name: 'silver', color: '#C0C0C0', rank: 2 },
     { id: 3, name: 'bronze', color: '#CD7F32', rank: 3 },
   ]);
+
+  function toggleAppearance() {
+    setAppearance(appearance === "light" ? "dark" : "light");
+  }
 
   function handleAdd(name) {
     const id = countries.length === 0 ? 1 : Math.max(...countries.map(country => country.id)) + 1;
@@ -58,9 +66,24 @@ function App() {
   }, []);
 
   return (
-    <>
-      <h1>Olympic Medals ({getAllMedalsTotal()}) <NewCountry onAdd={handleAdd} /></h1>
-      <div style={{ width: "100%", display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+        <Theme appearance={appearance}>
+      <Button onClick={toggleAppearance} style={{ position: "fixed", bottom: 20, right: 20, zIndex: 100 }} variant="ghost">
+        {
+          (appearance === "dark") ? <MoonIcon /> : <SunIcon />
+        }
+      </Button>
+      <Flex p="2" pl="8" className="fixedHeader" justify="between">
+        <Heading size="6">
+          Olympic Medals
+          <Badge variant="outline" ml="2">
+            <Heading size="6">{getAllMedalsTotal()}</Heading>
+          </Badge>
+        </Heading>
+        <NewCountry onAdd={handleAdd} />
+      </Flex>
+      <Container className="bg">
+      </Container>
+      <Flex wrap="wrap" justify="center">
         {
           countries.sort((a, b) => a.name.localeCompare(b.name)).map(country =>
             <Country
@@ -73,8 +96,8 @@ function App() {
             />
           )
         }
-      </div>
-    </>
+      </Flex>
+    </Theme>
   )
 }
 
